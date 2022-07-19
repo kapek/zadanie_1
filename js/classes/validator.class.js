@@ -11,7 +11,7 @@ export default class Validators {
 
   /* Check is number in right range */
   static isInRange(num) {
-    return num < 0 || num > 4;
+    return num < 1 || num > 4;
   }
 
   /* Check if value after conversation to undefined or null */

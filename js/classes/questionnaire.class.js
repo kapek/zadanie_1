@@ -29,11 +29,13 @@ export default class Questionnaire extends PrintMessages {
   /* Method to ask user a question */
   askAQuestion(message) {
     const user_choice = this.#checkAnswer(this.promptUser(message));
-    if (Validators.checkIsUndefinedOrNull(user_choice)) {
+    if (Validators.checkIsUndefinedOrNull(user_choice - 1)) {
       return;
     }
-    this.#results[user_choice] = this.#results[user_choice] + 1;
-    this.alertUser(JSON.stringify(this.#results));
+    this.#results[user_choice - 1] = this.#results[user_choice - 1] + 1;
+    document.querySelector('h1').innerHTML = JSON.stringify(this.#results);
+    // this.alertUser(JSON.stringify(this.#results));
+
   }
 
   /* Validate user answer whether is number and is it in right range */
@@ -44,7 +46,7 @@ export default class Questionnaire extends PrintMessages {
       return;
     }
     if (Validators.isInRange(conv_answer)) {
-      this.alertUser(`Your choice must be between 0 and 3. \n TRY AGAIN!`);
+      this.alertUser(`Your choice must be between 1 and 4. \n TRY AGAIN!`);
       return;
     }
     return answer;
