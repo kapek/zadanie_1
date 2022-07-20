@@ -13,7 +13,7 @@ export default class Questionnaire extends PrintMessages {
     super();
     this.#question = question;
     this.#options = options;
-    this.#results = options.map((option) => ({ option, value: 0 }));
+    this.#results = options.map((option) => ({ [option.toLowerCase()]: 0 }));
     console.log(this.#results);
   }
 
@@ -34,8 +34,9 @@ export default class Questionnaire extends PrintMessages {
       return;
     }
     const curr = this.#results[user_choice];
-    this.#results[user_choice] = { ...curr, value: curr.value + 1 };
-    this.alertUser(JSON.stringify(this.#results.map((o) => o.value)));
+    const key = Object.keys(curr);
+    this.#results[user_choice] = { [key]: curr[key] + 1 };
+    this.alertUser(JSON.stringify(this.#results));
   }
 
   /* Validate user answer whether is number and is it in right range */
