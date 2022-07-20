@@ -4,8 +4,7 @@ import Questionnaire from './classes/questionnaire.class.js';
 
 const questionnaire = new Questionnaire(
   'What is your favourite programming language?',
-  ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
-  [...new Array(4).fill(0)]
+  ['JavaScript', 'Python', 'Rust', 'C++'],
 );
 
 const message = `${questionnaire.question}\n${questionnaire.options.join('\n')}`;

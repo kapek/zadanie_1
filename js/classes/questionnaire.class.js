@@ -9,11 +9,12 @@ export default class Questionnaire extends PrintMessages {
   #options = '';
   #results = [];
 
-  constructor(question, options, results) {
+  constructor(question, options) {
     super();
     this.#question = question;
     this.#options = options;
-    this.#results = results;
+    this.#results = options.map((option) => ({ option, value: 0 }));
+    console.log(this.#results);
   }
 
   /* Get read only question */
@@ -32,8 +33,9 @@ export default class Questionnaire extends PrintMessages {
     if (Validators.checkIsUndefinedOrNull(user_choice)) {
       return;
     }
-    this.#results[user_choice] = this.#results[user_choice] + 1;
-    this.alertUser(JSON.stringify(this.#results));
+    const curr = this.#results[user_choice];
+    this.#results[user_choice] = { ...curr, value: curr.value + 1 };
+    this.alertUser(JSON.stringify(this.#results.map((o) => o.value)));
   }
 
   /* Validate user answer whether is number and is it in right range */
